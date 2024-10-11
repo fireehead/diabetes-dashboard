@@ -1,8 +1,11 @@
 "use client";
 
 import * as React from "react";
-import { TrendingUp, Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, TrendingUp } from "lucide-react";
 import { Label, Pie, PieChart } from "recharts";
+
+// Import the JSON data
+import chartData from './chartData.json';
 
 import {
   Card,
@@ -21,45 +24,52 @@ import {
 
 export const description = "A donut chart showing revenue through various diabetes management programs";
 
-const chartData = [
-  { program: "Obesity", revenue: 3000, fill: "var(--color-obesity)" },
-  { program: "Prediabetes", revenue: 2000, fill: "var(--color-prediabetes)" },
-  { program: "Behavioral Health", revenue: 3500, fill: "var(--color-behavioral)" },
-  { program: "Physical Activity", revenue: 2500, fill: "var(--color-physical)" },
-  { program: "Nutrition", revenue: 4000, fill: "var(--color-nutrition)" },
-];
+const colorMap: { [key: string]: string } = {
+  Obesity: "hsl(var(--chart-8))",
+  Prediabetes: "hsl(var(--chart-5))",
+  "Behavioral Health": "hsl(var(--chart-7))",
+  "Physical Activity": "hsl(var(--chart-5))",
+  Nutrition: "hsl(var(--chart-6))",
+};
 
-const chartConfig = {
+const chartConfig: ChartConfig = {
   revenue: {
     label: "Revenue",
   },
   obesity: {
     label: "Obesity",
-    color: "hsl(var(--chart-5))",
+    color: "hsl(var(--chart-1))",
   },
   prediabetes: {
     label: "Prediabetes",
-    color: "hsl(var(--chart-8))",
+    color: "hsl(var(--chart-2))",
   },
   behavioral: {
     label: "Behavioral Health",
-    color: "hsl(var(--chart-6))",
+    color: "hsl(var(--chart-3))",
   },
   physical: {
     label: "Physical Activity",
-    color: "hsl(var(--chart-7))",
+    color: "hsl(var(--chart-4))",
   },
   nutrition: {
     label: "Nutrition",
-    color: "hsl(var(--chart-9))",
+    color: "hsl(var(--chart-5))",
   },
-} satisfies ChartConfig;
+};
 
 export function PieChartText() {
-  const [isVisible, setIsVisible] = React.useState(true); 
+  const [isVisible, setIsVisible] = React.useState(true);
+
+  const chartDataWithColors = React.useMemo(() => {
+    return chartData.programRevenue.map((item) => ({
+      ...item,
+      fill: colorMap[item.program] || "hsl(var(--default-color))"
+    }));
+  }, []);
 
   const totalRevenue = React.useMemo(() => {
-    return chartData.reduce((acc, curr) => acc + curr.revenue, 0);
+    return chartData.programRevenue.reduce((acc, curr) => acc + curr.revenue, 0);
   }, []);
 
   const toggleVisibility = () => {
@@ -69,7 +79,7 @@ export function PieChartText() {
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0 relative">
-        <CardTitle>Revenue by Program</CardTitle>
+        <CardTitle>Pie Chart - Revenue by Program</CardTitle>
         <CardDescription>January - June 2024</CardDescription>
 
         <button
@@ -84,7 +94,7 @@ export function PieChartText() {
       {isVisible && (
         <CardContent className="flex-1 pb-0">
           <ChartContainer
-            config={chartConfig}
+            config={chartConfig}  // Pass the chart config here
             className="mx-auto aspect-square max-h-[250px]"
           >
             <PieChart>
@@ -93,7 +103,7 @@ export function PieChartText() {
                 content={<ChartTooltipContent hideLabel />}
               />
               <Pie
-                data={chartData}
+                data={chartDataWithColors}  // Use the modified data with colors
                 dataKey="revenue"
                 nameKey="program"
                 innerRadius={60}

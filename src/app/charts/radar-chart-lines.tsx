@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { TrendingUp, Eye, EyeOff } from "lucide-react";
 import { PolarAngleAxis, PolarGrid, Radar, RadarChart } from "recharts";
+import chartData from './chartData.json';
 
 import {
   Card,
@@ -21,14 +22,14 @@ import {
 
 export const description = "A radar chart showing patient revisits between pre-diabetic and diabetic patients";
 
-const chartData = [
-  { month: "January", preDiabetic: 100, diabetic: 120 },
-  { month: "February", preDiabetic: 110, diabetic: 130 },
-  { month: "March", preDiabetic: 120, diabetic: 140 },
-  { month: "April", preDiabetic: 115, diabetic: 135 },
-  { month: "May", preDiabetic: 130, diabetic: 150 },
-  { month: "June", preDiabetic: 125, diabetic: 160 },
-];
+// const chartData = [
+//   { month: "January", preDiabetic: 100, diabetic: 120 },
+//   { month: "February", preDiabetic: 110, diabetic: 130 },
+//   { month: "March", preDiabetic: 120, diabetic: 140 },
+//   { month: "April", preDiabetic: 115, diabetic: 135 },
+//   { month: "May", preDiabetic: 130, diabetic: 150 },
+//   { month: "June", preDiabetic: 125, diabetic: 160 },
+// ];
 
 const chartConfig = {
   preDiabetic: {
@@ -71,7 +72,7 @@ export function RadarChartLines() {
             config={chartConfig}
             className="mx-auto aspect-square max-h-[250px]"
           >
-            <RadarChart data={chartData}>
+            <RadarChart data={chartData.preDiabeticVsDiabeticRevisits}>
               <ChartTooltip
                 cursor={false}
                 content={<ChartTooltipContent indicator="line" />}

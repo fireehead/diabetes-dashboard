@@ -2,6 +2,7 @@
 
 import { Eye, EyeOff, TrendingUp } from "lucide-react";
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
+import chartData from './chartData.json';
 
 import {
   Card,
@@ -21,14 +22,14 @@ import { useState } from "react";
 
 export const description = "A multiple bar chart showing online and in-person enrollments";
 
-const chartData = [
-  { month: "January", online: 120, inPerson: 90 },
-  { month: "February", online: 150, inPerson: 100 },
-  { month: "March", online: 130, inPerson: 95 },
-  { month: "April", online: 160, inPerson: 110 },
-  { month: "May", online: 180, inPerson: 105 },
-  { month: "June", online: 200, inPerson: 120 },
-];
+// const chartData = [
+//   { month: "January", online: 120, inPerson: 90 },
+//   { month: "February", online: 150, inPerson: 100 },
+//   { month: "March", online: 130, inPerson: 95 },
+//   { month: "April", online: 160, inPerson: 110 },
+//   { month: "May", online: 180, inPerson: 105 },
+//   { month: "June", online: 200, inPerson: 120 },
+// ];
 
 const chartConfig = {
   online: {
@@ -64,7 +65,7 @@ export function BarChartMultiple() {
       {isVisible && (
         <CardContent>
           <ChartContainer config={chartConfig}>
-            <BarChart accessibilityLayer data={chartData}>
+            <BarChart accessibilityLayer data={chartData.onlineInPersonEnrollments}>
               <CartesianGrid vertical={false} />
               <XAxis
                 dataKey="month"

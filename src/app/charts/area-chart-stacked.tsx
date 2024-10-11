@@ -4,6 +4,8 @@ import { useState } from "react";
 import { TrendingUp, Eye, EyeOff } from "lucide-react";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 
+import chartData from './chartData.json';
+
 import {
   Card,
   CardContent,
@@ -20,15 +22,6 @@ import {
 } from "@/components/ui/chart";
 
 export const description = "An area chart showing trends in medication and counseling sessions";
-
-const chartData = [
-  { month: "January", medication: 150, counseling: 100 },
-  { month: "February", medication: 180, counseling: 20 },
-  { month: "March", medication: 90, counseling: 150 },
-  { month: "April", medication: 200, counseling: 140 },
-  { month: "May", medication: 170, counseling: 125 },
-  { month: "June", medication: 190, counseling: 150 },
-];
 
 const chartConfig = {
   medication: {
@@ -69,7 +62,7 @@ export function AreaChartStacked() {
           <ChartContainer config={chartConfig}>
             <AreaChart
               accessibilityLayer
-              data={chartData}
+              data={chartData.medicationCounseling}
               margin={{
                 left: 12,
                 right: 12,

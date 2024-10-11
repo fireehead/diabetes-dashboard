@@ -1,0 +1,34 @@
+{
+    "medicationCounseling": [
+      { "month": "January", "medication": 150, "counseling": 100 },
+      { "month": "February", "medication": 180, "counseling": 20 },
+      { "month": "March", "medication": 90, "counseling": 150 },
+      { "month": "April", "medication": 200, "counseling": 140 },
+      { "month": "May", "medication": 170, "counseling": 125 },
+      { "month": "June", "medication": 190, "counseling": 150 }
+    ],
+    "onlineInPersonEnrollments": [
+      { "month": "January", "online": 120, "inPerson": 90 },
+      { "month": "February", "online": 150, "inPerson": 100 },
+      { "month": "March", "online": 130, "inPerson": 95 },
+      { "month": "April", "online": 160, "inPerson": 110 },
+      { "month": "May", "online": 180, "inPerson": 105 },
+      { "month": "June", "online": 200, "inPerson": 120 }
+    ],
+    "preDiabeticVsDiabeticRevisits": [
+      { "month": "January", "preDiabetic": 100, "diabetic": 120 },
+      { "month": "February", "preDiabetic": 110, "diabetic": 130 },
+      { "month": "March", "preDiabetic": 120, "diabetic": 140 },
+      { "month": "April", "preDiabetic": 115, "diabetic": 135 },
+      { "month": "May", "preDiabetic": 130, "diabetic": 150 },
+      { "month": "June", "preDiabetic": 125, "diabetic": 160 }
+    ],
+    "programRevenue": [
+        { "program": "Obesity", "revenue": 3000 },
+        { "program": "Prediabetes", "revenue": 2000 },
+        { "program": "Behavioral Health", "revenue": 3500 },
+        { "program": "Physical Activity", "revenue": 2500 },
+        { "program": "Nutrition", "revenue": 4000 }
+      ]
+  }
+  
