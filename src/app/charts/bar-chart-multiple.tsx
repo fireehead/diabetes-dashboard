@@ -1,6 +1,6 @@
 "use client"
 
-import { TrendingUp } from "lucide-react"
+import { Eye, EyeOff, TrendingUp } from "lucide-react"
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
 
 import {
@@ -17,6 +17,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
+import { useState } from "react"
 
 export const description = "A multiple bar chart"
 
@@ -41,12 +42,27 @@ const chartConfig = {
 } satisfies ChartConfig
 
 export function BarChartMultiple() {
+
+    const [isVisible, setIsVisible] = useState(true);
+    const toggleVisibility = () => {
+        setIsVisible(!isVisible);
+    }
+    
   return (
     <Card>
-      <CardHeader>
+      <CardHeader  className="relative">
         <CardTitle>Bar Chart - Multiple</CardTitle>
         <CardDescription>January - June 2024</CardDescription>
+        <button
+          onClick={toggleVisibility}
+          className="absolute top-0 right-2 p-4"
+          aria-label="Toggle chart visibility"
+        >
+          {isVisible ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+        </button>
       </CardHeader>
+
+      {isVisible && (
       <CardContent>
         <ChartContainer config={chartConfig}>
           <BarChart accessibilityLayer data={chartData}>
@@ -67,6 +83,7 @@ export function BarChartMultiple() {
           </BarChart>
         </ChartContainer>
       </CardContent>
+      )}
       <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="flex gap-2 font-medium leading-none">
           Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
