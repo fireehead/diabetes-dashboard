@@ -48,6 +48,8 @@ export function RadarChartLines() {
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
   };
+  
+  if (!isVisible) return null;
 
   return (
     <Card>
@@ -66,7 +68,7 @@ export function RadarChartLines() {
         </button>
       </CardHeader>
 
-      {isVisible && (
+
         <CardContent className="pb-0">
           <ChartContainer
             config={chartConfig}
@@ -96,7 +98,7 @@ export function RadarChartLines() {
             </RadarChart>
           </ChartContainer>
         </CardContent>
-      )}
+
 
       <CardFooter className="flex-col gap-2 text-sm">
         <div className="flex items-center gap-2 font-medium leading-none">

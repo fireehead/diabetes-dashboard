@@ -22,15 +22,6 @@ import { useState } from "react";
 
 export const description = "A multiple bar chart showing online and in-person enrollments";
 
-// const chartData = [
-//   { month: "January", online: 120, inPerson: 90 },
-//   { month: "February", online: 150, inPerson: 100 },
-//   { month: "March", online: 130, inPerson: 95 },
-//   { month: "April", online: 160, inPerson: 110 },
-//   { month: "May", online: 180, inPerson: 105 },
-//   { month: "June", online: 200, inPerson: 120 },
-// ];
-
 const chartConfig = {
   online: {
     label: "Online Enrollments",
@@ -48,6 +39,7 @@ export function BarChartMultiple() {
     setIsVisible(!isVisible);
   };
 
+  if (!isVisible) return null;
   return (
     <Card>
       <CardHeader className="relative">
@@ -62,7 +54,7 @@ export function BarChartMultiple() {
         </button>
       </CardHeader>
 
-      {isVisible && (
+
         <CardContent>
           <ChartContainer config={chartConfig}>
             <BarChart accessibilityLayer data={chartData.onlineInPersonEnrollments}>
@@ -83,7 +75,7 @@ export function BarChartMultiple() {
             </BarChart>
           </ChartContainer>
         </CardContent>
-      )}
+
       <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="flex gap-2 font-medium leading-none">
           Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />

@@ -75,6 +75,7 @@ export function PieChartText() {
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
   };
+  if (!isVisible) return null;
 
   return (
     <Card className="flex flex-col">
@@ -91,10 +92,10 @@ export function PieChartText() {
         </button>
       </CardHeader>
 
-      {isVisible && (
+
         <CardContent className="flex-1 pb-0">
           <ChartContainer
-            config={chartConfig}  // Pass the chart config here
+            config={chartConfig}  
             className="mx-auto aspect-square max-h-[250px]"
           >
             <PieChart>
@@ -103,7 +104,7 @@ export function PieChartText() {
                 content={<ChartTooltipContent hideLabel />}
               />
               <Pie
-                data={chartDataWithColors}  // Use the modified data with colors
+                data={chartDataWithColors} 
                 dataKey="revenue"
                 nameKey="program"
                 innerRadius={60}
@@ -142,7 +143,7 @@ export function PieChartText() {
             </PieChart>
           </ChartContainer>
         </CardContent>
-      )}
+
 
       <CardFooter className="flex-col gap-2 text-sm">
         <div className="flex items-center gap-2 font-medium leading-none">

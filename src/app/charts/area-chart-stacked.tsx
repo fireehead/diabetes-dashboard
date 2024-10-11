@@ -4,7 +4,7 @@ import { useState } from "react";
 import { TrendingUp, Eye, EyeOff } from "lucide-react";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 
-import chartData from './chartData.json';
+import chartData from './chartData.json'; 
 
 import {
   Card,
@@ -21,7 +21,6 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 
-export const description = "An area chart showing trends in medication and counseling sessions";
 
 const chartConfig = {
   medication: {
@@ -41,6 +40,8 @@ export function AreaChartStacked() {
     setIsVisible(!isVisible);
   };
 
+  if (!isVisible) return null;
+
   return (
     <Card>
       <CardHeader className="relative">
@@ -57,72 +58,75 @@ export function AreaChartStacked() {
         </button>
       </CardHeader>
 
-      {isVisible && (
-        <CardContent>
-          <ChartContainer config={chartConfig}>
-            <AreaChart
-              accessibilityLayer
-              data={chartData.medicationCounseling}
-              margin={{
-                left: 12,
-                right: 12,
-              }}
-            >
-              <CartesianGrid vertical={false} />
-              <XAxis
-                dataKey="month"
-                tickLine={false}
-                axisLine={false}
-                tickMargin={8}
-                tickFormatter={(value) => value.slice(0, 3)}
-              />
-              <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
-              <defs>
-                <linearGradient id="fillMedication" x1="0" y1="0" x2="0" y2="1">
-                  <stop
-                    offset="5%"
-                    stopColor="var(--color-medication)"
-                    stopOpacity={0.8}
-                  />
-                  <stop
-                    offset="95%"
-                    stopColor="var(--color-medication)"
-                    stopOpacity={0.1}
-                  />
-                </linearGradient>
-                <linearGradient id="fillCounseling" x1="0" y1="0" x2="0" y2="1">
-                  <stop
-                    offset="5%"
-                    stopColor="var(--color-counseling)"
-                    stopOpacity={0.8}
-                  />
-                  <stop
-                    offset="95%"
-                    stopColor="var(--color-counseling)"
-                    stopOpacity={0.1}
-                  />
-                </linearGradient>
-              </defs>
-              <Area
-                dataKey="medication"
-                type="natural"
-                fill="url(#fillMedication)"
-                fillOpacity={0.4}
-                stroke="var(--color-medication)"
-                stackId="a"
-              />
-              <Area
-                dataKey="counseling"
-                type="natural"
-                fill="url(#fillCounseling)"
-                fillOpacity={0.4}
-                stroke="var(--color-counseling)"
-                stackId="a"
-              />
-            </AreaChart>
-          </ChartContainer>
-        </CardContent>
-      )}
+      <CardContent>
+        <ChartContainer config={chartConfig}>
+          <AreaChart
+            accessibilityLayer
+            data={chartData.medicationCounseling} // Assuming the chart data is under "medicationCounseling"
+            margin={{
+              left: 12,
+              right: 12,
+            }}
+          >
+            <CartesianGrid vertical={false} />
+            <XAxis
+              dataKey="month"
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+              tickFormatter={(value) => value.slice(0, 3)}
+            />
+            <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+            {/* Define the gradient for the Medication area */}
+            <defs>
+              <linearGradient id="fillMedication" x1="0" y1="0" x2="0" y2="1">
+                <stop
+                  offset="5%"
+                  stopColor="var(--color-medication)"
+                  stopOpacity={0.8}
+                />
+                <stop
+                  offset="95%"
+                  stopColor="var(--color-medication)"
+                  stopOpacity={0.1}
+                />
+              </linearGradient>
+              {/* Define the gradient for the Counseling area */}
+              <linearGradient id="fillCounseling" x1="0" y1="0" x2="0" y2="1">
+                <stop
+                  offset="5%"
+                  stopColor="var(--color-counseling)"
+                  stopOpacity={0.8}
+                />
+                <stop
+                  offset="95%"
+                  stopColor="var(--color-counseling)"
+                  stopOpacity={0.1}
+                />
+              </linearGradient>
+            </defs>
+            {/* Render the area for Medication */}
+            <Area
+              dataKey="medication"
+              type="natural"
+              fill="url(#fillMedication)"
+              fillOpacity={0.4}
+              stroke="var(--color-medication)"
+              stackId="a"
+            />
+            {/* Render the area for Counseling */}
+            <Area
+              dataKey="counseling"
+              type="natural"
+              fill="url(#fillCounseling)"
+              fillOpacity={0.4}
+              stroke="var(--color-counseling)"
+              stackId="a"
+            />
+          </AreaChart>
+        </ChartContainer>
+      </CardContent>
+
       <CardFooter>
         <div className="flex w-full items-start gap-2 text-sm">
           <div className="grid gap-2">
