@@ -19,47 +19,47 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 
-export const description = "A donut chart with text";
+export const description = "A donut chart showing revenue through various diabetes management programs";
 
 const chartData = [
-  { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
-  { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-  { browser: "firefox", visitors: 287, fill: "var(--color-firefox)" },
-  { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
-  { browser: "other", visitors: 190, fill: "var(--color-other)" },
+  { program: "Obesity", revenue: 3000, fill: "var(--color-obesity)" },
+  { program: "Prediabetes", revenue: 2000, fill: "var(--color-prediabetes)" },
+  { program: "Behavioral Health", revenue: 3500, fill: "var(--color-behavioral)" },
+  { program: "Physical Activity", revenue: 2500, fill: "var(--color-physical)" },
+  { program: "Nutrition", revenue: 4000, fill: "var(--color-nutrition)" },
 ];
 
 const chartConfig = {
-  visitors: {
-    label: "Visitors",
+  revenue: {
+    label: "Revenue",
   },
-  chrome: {
-    label: "Chrome",
-    color: "hsl(var(--chart-1))",
-  },
-  safari: {
-    label: "Safari",
-    color: "hsl(var(--chart-2))",
-  },
-  firefox: {
-    label: "Firefox",
-    color: "hsl(var(--chart-3))",
-  },
-  edge: {
-    label: "Edge",
-    color: "hsl(var(--chart-4))",
-  },
-  other: {
-    label: "Other",
+  obesity: {
+    label: "Obesity",
     color: "hsl(var(--chart-5))",
+  },
+  prediabetes: {
+    label: "Prediabetes",
+    color: "hsl(var(--chart-8))",
+  },
+  behavioral: {
+    label: "Behavioral Health",
+    color: "hsl(var(--chart-6))",
+  },
+  physical: {
+    label: "Physical Activity",
+    color: "hsl(var(--chart-7))",
+  },
+  nutrition: {
+    label: "Nutrition",
+    color: "hsl(var(--chart-9))",
   },
 } satisfies ChartConfig;
 
 export function PieChartText() {
   const [isVisible, setIsVisible] = React.useState(true); 
 
-  const totalVisitors = React.useMemo(() => {
-    return chartData.reduce((acc, curr) => acc + curr.visitors, 0);
+  const totalRevenue = React.useMemo(() => {
+    return chartData.reduce((acc, curr) => acc + curr.revenue, 0);
   }, []);
 
   const toggleVisibility = () => {
@@ -69,10 +69,9 @@ export function PieChartText() {
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0 relative">
-        <CardTitle>Pie Chart - Donut with Text</CardTitle>
+        <CardTitle>Revenue by Program</CardTitle>
         <CardDescription>January - June 2024</CardDescription>
 
-    
         <button
           onClick={toggleVisibility}
           className="absolute top-0 right-0 p-2"
@@ -95,8 +94,8 @@ export function PieChartText() {
               />
               <Pie
                 data={chartData}
-                dataKey="visitors"
-                nameKey="browser"
+                dataKey="revenue"
+                nameKey="program"
                 innerRadius={60}
                 strokeWidth={5}
               >
@@ -115,14 +114,14 @@ export function PieChartText() {
                             y={viewBox.cy}
                             className="fill-foreground text-3xl font-bold"
                           >
-                            {totalVisitors.toLocaleString()}
+                            {`$${totalRevenue.toLocaleString()}`}
                           </tspan>
                           <tspan
                             x={viewBox.cx}
                             y={(viewBox.cy || 0) + 24}
                             className="fill-muted-foreground"
                           >
-                            Visitors
+                            Total Revenue
                           </tspan>
                         </text>
                       );
@@ -140,7 +139,7 @@ export function PieChartText() {
           Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
         </div>
         <div className="leading-none text-muted-foreground">
-          Showing total visitors for the last 6 months
+          Showing revenue for the last 6 months
         </div>
       </CardFooter>
     </Card>

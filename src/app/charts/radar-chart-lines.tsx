@@ -19,30 +19,30 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 
-export const description = "A radar chart with lines only";
+export const description = "A radar chart showing patient revisits between pre-diabetic and diabetic patients";
 
 const chartData = [
-  { month: "January", desktop: 186, mobile: 160 },
-  { month: "February", desktop: 185, mobile: 170 },
-  { month: "March", desktop: 207, mobile: 180 },
-  { month: "April", desktop: 173, mobile: 160 },
-  { month: "May", desktop: 160, mobile: 190 },
-  { month: "June", desktop: 174, mobile: 204 },
+  { month: "January", preDiabetic: 100, diabetic: 120 },
+  { month: "February", preDiabetic: 110, diabetic: 130 },
+  { month: "March", preDiabetic: 120, diabetic: 140 },
+  { month: "April", preDiabetic: 115, diabetic: 135 },
+  { month: "May", preDiabetic: 130, diabetic: 150 },
+  { month: "June", preDiabetic: 125, diabetic: 160 },
 ];
 
 const chartConfig = {
-  desktop: {
-    label: "Desktop",
-    color: "hsl(var(--chart-1))",
+  preDiabetic: {
+    label: "Pre-Diabetic",
+    color: "hsl(var(--chart-5))",
   },
-  mobile: {
-    label: "Mobile",
-    color: "hsl(var(--chart-2))",
+  diabetic: {
+    label: "Diabetic",
+    color: "hsl(var(--chart-7))",
   },
 } satisfies ChartConfig;
 
 export function RadarChartLines() {
-  const [isVisible, setIsVisible] = useState(true); 
+  const [isVisible, setIsVisible] = useState(true);
 
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
@@ -51,12 +51,11 @@ export function RadarChartLines() {
   return (
     <Card>
       <CardHeader className="items-center pb-4 relative">
-        <CardTitle>Radar Chart - Lines Only</CardTitle>
+        <CardTitle>Pre-Diabetic vs Diabetic Revisits</CardTitle>
         <CardDescription>
-          Showing total visitors for the last 6 months
+          Showing patient revisits for the last 6 months
         </CardDescription>
 
-      
         <button
           onClick={toggleVisibility}
           className="absolute top-0 right-0 p-2"
@@ -80,17 +79,17 @@ export function RadarChartLines() {
               <PolarAngleAxis dataKey="month" />
               <PolarGrid radialLines={false} />
               <Radar
-                dataKey="desktop"
-                fill="var(--color-desktop)"
+                dataKey="preDiabetic"
+                fill="var(--color-preDiabetic)"
                 fillOpacity={0}
-                stroke="var(--color-desktop)"
+                stroke="var(--color-preDiabetic)"
                 strokeWidth={2}
               />
               <Radar
-                dataKey="mobile"
-                fill="var(--color-mobile)"
+                dataKey="diabetic"
+                fill="var(--color-diabetic)"
                 fillOpacity={0}
-                stroke="var(--color-mobile)"
+                stroke="var(--color-diabetic)"
                 strokeWidth={2}
               />
             </RadarChart>
